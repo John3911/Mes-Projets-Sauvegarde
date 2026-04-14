@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessoires - TERANG'ART</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header class="shop-header">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="header-left">
+                <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Retour</a>
+                <h1 style="margin-top: 10px;">Rayon Accessoires</h1>
+            </div>
+            
+            <div class="cart-icon-container" onclick="ouvrirPanier()">
+                <i class="fas fa-shopping-bag"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 30px;">
+        <div id="liste-produits-acc" class="product-grid">
+            </div>
+    </main>
+
+    <section class="container contact-container" style="margin-top: 50px;">
+        <div class="contact-grid">
+            <div class="contact-info-box">
+                <h3>Nos Coordonnées</h3>
+                <p><i class="fas fa-phone"></i> +221 77 391 21 00</p>
+                <p><i class="fab fa-whatsapp"></i> +221 77 391 21 00</p>
+                <p><i class="fas fa-map-marker-alt"></i> Dakar, Liberté 6 / Ouest-foire / Cité Xandar</p>
+            </div>
+            <div class="map-box">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.74714156104!2d-17.4727!3d14.7271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQzJzM3LjYiTiAxN8KwMjgnMjEuNyJX!5e0!3m2!1sfr!2ssn!4v1700000000000" 
+                    width="100%" height="300" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 20px;">
+        <p>© 2026 <strong>TERANG'ART</strong>. Réalisé par <strong>ABZ DESIGN TECH</strong></p>
+    </footer>
+
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close-cart" onclick="fermerPanier()">×</span>
+            <h2>Mon Panier</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <strong>Total: <span id="total-price">0</span> FCFA</strong>
+            </div>
+            <button class="btn-order-whatsapp" onclick="envoyerCommandeWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</html>

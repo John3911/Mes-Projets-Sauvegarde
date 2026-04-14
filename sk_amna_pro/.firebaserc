@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "sk-amna"
+  },
+  "targets": {
+    "sk-amna": {
+      "hosting": {
+        "pro": [
+          "sk-amna-pro"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

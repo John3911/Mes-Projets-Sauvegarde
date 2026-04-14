@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/logo-abz.png">
+
+<link rel="apple-touch-icon" href="images/logo-abz.png">
+    <title>Admin - ABZ DESIGN TECH</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+    <style>
+        :root { --admin-sidebar: #1a1a1a; --admin-active: #0062ff; }
+        body { display: flex; background: #f0f2f5; min-height: 100vh; margin: 0; font-family: 'Poppins', sans-serif; }
+        
+        .sidebar { width: 280px; background: var(--admin-sidebar); color: white; padding: 20px; position: fixed; height: 100%; overflow-y: auto; }
+        .sidebar h2 { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 30px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { padding: 12px 15px; cursor: pointer; border-radius: 8px; transition: 0.3s; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
+        .sidebar li:hover, .sidebar li.active { background: var(--admin-active); color: white; }
+        
+        .admin-main { flex: 1; margin-left: 280px; padding: 40px; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .btn-add { background: var(--admin-active); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        
+        .stock-table { width: 100%; background: white; border-radius: 12px; border-collapse: collapse; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .stock-table th { background: #f8f9fa; padding: 15px; text-align: left; color: #888; border-bottom: 2px solid #eee; font-size: 0.85rem; }
+        .stock-table td { padding: 15px; border-bottom: 1px solid #eee; font-size: 0.9rem; vertical-align: middle; }
+        
+        .cat-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; background: #f0f2f5; color: #666; font-weight: 600; }
+        .btn-del { color: #dc3545; cursor: pointer; border: none; background: none; font-size: 1.1rem; }
+        
+        /* Modal */
+        #product-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center; backdrop-filter: blur(4px); }
+        .modal-content { background:white; width:550px; padding:30px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display:block; font-size:0.8rem; font-weight:bold; margin-bottom:5px; color:#444; }
+        .form-group input, .form-group select, .form-group textarea { width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; box-sizing: border-box; font-family: inherit; }
+        
+        /* Badge Stock */
+        .stock-pill { padding: 4px 12px; border-radius: 20px; color: white; font-weight: bold; font-size: 0.75rem; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div style="background: white; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
+            <img src="images/logo-abz.png" alt="ABZ" style="width: 100%;">
+        </div>
+        <h2 onclick="afficherProduitsFirebase('tous')" style="cursor:pointer; color:#0062ff">Tableau de Bord</h2>
+        <h2>Informatique</h2>
+        <ul><li onclick="filtrer('Informatique')"><i class="fas fa-network-wired"></i> Stock IT</li></ul>
+        <h2>Sécurité</h2>
+        <ul><li onclick="filtrer('Sécurité')"><i class="fas fa-video"></i> Stock Sécurité</li></ul>
+        <h2>Électrique</h2>
+        <ul><li onclick="filtrer('Électrique')"><i class="fas fa-bolt"></i> Stock Électrique</li></ul>
+    </div>
+
+    <main class="admin-main">
+        <header class="admin-header">
+            <div>
+                <h1 id="main-title">Gestion des Stocks Cloud</h1>
+                <p id="current-sector">Vue d'ensemble Firebase</p>
+            </div>
+            <button class="btn-add" onclick="toggleModal(true)"><i class="fas fa-plus"></i> Nouveau Produit</button>
+        </header>
+
+        <table class="stock-table">
+           <thead>
+    <tr>
+        <th>Référence</th> <th>Produit</th>
+        <th>Description</th>
+        <th>Prix</th>
+        <th>Stock</th>
+        <th>Secteur / Sous-Catégorie</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+            <tbody id="stock-list"></tbody>
+        </table>
+    </main>
+
+    <div id="product-modal">
+        <div class="modal-content">
+            <h2 style="margin-top:0;">Nouveau Produit Firebase</h2>
+            <form id="product-form">
+                <div class="form-group">
+                    <label>Nom du produit</label>
+                    <input type="text" id="p-name" required>
+                </div>
+                <div class="form-group">
+    <label for="p-ref">Référence Produit</label>
+    <input type="text" id="p-ref" placeholder="Ex: ABZ-CAM-001" required>
+</div>
+
+<div class="form-group">
+    <label for="p-desc">Description</label>
+    <textarea id="p-desc" rows="3" required></textarea>
+</div>
+
+                <div style="display:flex; gap:15px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Prix (FCFA)</label>
+                        <input type="number" id="p-price" required>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Quantité en Stock</label>
+                        <input type="number" id="p-stock" value="1" min="0" required>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:15px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Secteur Principal</label>
+                        <select id="p-sector" onchange="updateSubCategories()">
+                            <option value="Informatique">Informatique</option>
+                            <option value="Sécurité">Sécurité</option>
+                            <option value="Électrique">Électrique</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Sous-Catégorie</label>
+                        <select id="p-subcategory"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Image (ex: camera.jpg)</label>
+                    <input type="text" id="p-img" placeholder="Fichier dans /images">
+                </div>
+
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                    <button type="button" onclick="toggleModal(false)" style="background:#eee; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">Annuler</button>
+                    <button type="submit" style="background:#0062ff; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:bold;">Enregistrer sur Cloud</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script>
+    // 1. CONFIGURATION FIREBASE (URL MISE À JOUR POUR EUROPE-WEST1)
+    const firebaseConfig = {
+        apiKey: "AIzaSyCBhvDjA3PDeM54vtfPCezkdyczyTAVtOw",
+        authDomain: "abz-design-tech.firebaseapp.com",
+        projectId: "abz-design-tech",
+        storageBucket: "abz-design-tech.firebasestorage.app",
+        messagingSenderId: "228872777031",
+        appId: "1:228872777031:web:5235c1ee176bb903b73062",
+        databaseURL: "https://abz-design-tech-default-rtdb.europe-west1.firebasedatabase.app"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const subCategories = {
+        "Informatique": ["Équipements Réseaux & Connectivité", "Solutions de Câblage Ethernet", "Infrastructure Fibre Optique"],
+        "Sécurité": ["Équipements de Surveillance IP", "Contrôle d'accès", "Domotique & Protection Intrusion"],
+        "Électrique": ["Protection & Tableau Électrique", "Solaire & Autonomie Énergétique"]
+    };
+
+    function updateSubCategories() {
+        const sector = document.getElementById('p-sector').value;
+        const subSelect = document.getElementById('p-subcategory');
+        subSelect.innerHTML = "";
+        subCategories[sector].forEach(sub => {
+            let opt = document.createElement('option');
+            opt.value = sub; opt.textContent = sub;
+            subSelect.appendChild(opt);
+        });
+    }
+
+    function toggleModal(show) {
+        document.getElementById('product-modal').style.display = show ? 'flex' : 'none';
+        if(show) updateSubCategories();
+    }
+
+    // 2. ENREGISTREMENT SUR FIREBASE
+document.getElementById('product-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // On récupère toutes les valeurs, y compris la nouvelle référence
+    const nouveauProduit = {
+        reference: document.getElementById('p-ref').value, // Ajout de la référence
+        nom: document.getElementById('p-name').value,
+        description: document.getElementById('p-desc').value,
+        prix: document.getElementById('p-price').value,
+        stock: parseInt(document.getElementById('p-stock').value),
+        secteur: document.getElementById('p-sector').value,
+        sousCat: document.getElementById('p-subcategory').value,
+        image: "images/" + (document.getElementById('p-img').value || 'default.jpg'),
+        timestamp: Date.now()
+    };
+
+    db.ref('stock').push(nouveauProduit)
+        .then(() => {
+            toggleModal(false);
+            this.reset();
+            alert("Produit enregistré avec succès !");
+        })
+        .catch(error => alert("Erreur : " + error.message));
+});
+
+// 3. AFFICHAGE EN TEMPS RÉEL
+function afficherProduitsFirebase(filtre = 'tous') {
+    const list = document.getElementById('stock-list');
+    
+    db.ref('stock').on('value', (snapshot) => {
+        list.innerHTML = "";
+        snapshot.forEach((childSnapshot) => {
+            const p = childSnapshot.val();
+            const key = childSnapshot.key;
+
+            if (filtre === 'tous' || p.secteur === filtre) {
+                const stockStatus = p.stock > 0 ? "In Stock" : "Rupture";
+                const stockBg = p.stock > 0 ? "#28a745" : "#dc3545";
+
+                list.innerHTML += `
+                    <tr>
+                        <td style="font-family:monospace; font-weight:bold; color:#555;">${p.reference || 'REF-X'}</td>
+                        
+                        <td><strong>${p.nom}</strong></td>
+                        <td style="max-width:200px; color:#666; font-size:0.8rem;">${p.description || '-'}</td>
+                        <td style="font-weight:600;">${parseInt(p.prix).toLocaleString()} F</td>
+                        <td>
+                            <span class="stock-pill" style="background:${stockBg}; color:white; padding:4px 8px; border-radius:12px; font-size:11px;">
+                                ${p.stock} (${stockStatus})
+                            </span>
+                        </td>
+                        <td>
+                            <span style="color:#0062ff; font-weight:600; font-size:0.9rem;">${p.secteur}</span><br>
+                            <small class="cat-badge" style="background:#eee; padding:2px 5px; border-radius:4px;">${p.sousCat}</small>
+                        </td>
+                        <td>
+                            <button class="btn-del" onclick="supprimerProduitFirebase('${key}')" style="color:#dc3545; background:none; border:none; cursor:pointer;">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }
+        });
+    });
+}
+
+    function supprimerProduitFirebase(key) {
+        if(confirm("Supprimer définitivement ce produit ?")) {
+            db.ref('stock/' + key).remove();
+        }
+    }
+
+    function filtrer(secteur) {
+        document.getElementById('current-sector').innerText = "Secteur : " + secteur;
+        afficherProduitsFirebase(secteur);
+    }
+
+    window.onload = () => afficherProduitsFirebase('tous');
+</script>
+</body>
+</html>

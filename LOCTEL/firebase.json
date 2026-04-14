@@ -1,0 +1,40 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "loctel-tracker",
+          "appId": "1:265206840779:android:06d2e2e77cd83eac824a4e",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "loctel-tracker",
+          "configurations": {
+            "android": "1:265206840779:android:06d2e2e77cd83eac824a4e",
+            "ios": "1:265206840779:ios:9aa87c3e7ec1b9ad824a4e",
+            "macos": "1:265206840779:ios:9aa87c3e7ec1b9ad824a4e",
+            "web": "1:265206840779:web:00102f976a5fcd65824a4e",
+            "windows": "1:265206840779:web:b08e22c9c76a409e824a4e"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "site": "loctel-tracker",
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

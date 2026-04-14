@@ -1,0 +1,37 @@
+{
+  "name": "ABZ DESIGN TECH",
+  "short_name": "ABZ Tech",
+  "description": "Expertise en solutions digitales et sécurité à Dakar",
+  "start_url": "./index.html",
+  "id": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a1a1a",
+  "icons": [
+    {
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Accueil de ABZ Tech sur ordinateur"
+    },
+    {
+      "src": "images/screenshot-mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "label": "Interface mobile ABZ Tech"
+    }
+  ]
+}

@@ -1,0 +1,987 @@
+body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; text-align: center; }
+nav { background: white; padding: 20px; shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.hero { background: #f9169a; color: white; padding: 60px 20px; }
+.logo { max-width: 150px; margin-bottom: 20px; }
+.dons { display: flex; justify-content: center; gap: 20px; padding: 40px; flex-wrap: wrap; }
+.card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 300px; }
+.local { border-top: 8px solid #f9169a; }
+.inter { border-top: 8px solid #2563eb; }
+button { width: 100%; padding: 15px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; margin-top: 20px; }
+#btn-pay-local { background:#f9169a; }
+#btn-pay-inter { background: #2563eb; }
+
+/* Style du Footer */
+.main-footer {
+    background: #1a1a1a;
+    color: #ffffff;
+    padding: 60px 0 20px;
+    font-family: Arial, sans-serif;
+    margin-top: 50px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.main-footer h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-about p, .footer-contact p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+
+.social-icons {
+    margin-top: 20px;
+}
+
+.social-icons a {
+    color: #ffffff;
+    margin-right: 15px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.social-icons a:hover { color: #f9169a; }
+
+.footer-contact p i {
+    color: #f9169a;
+    margin-right: 10px;
+}
+
+.map-container {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.maps-link {
+    color: #f9169a;
+    font-size: 13px;
+    text-decoration: none;
+    display: block;
+    margin-top: 5px;
+}
+
+.partner-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.partner-logos img {
+    height: 40px;
+    filter: grayscale(100%);
+    transition: 0.3s;
+    background: white;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.partner-logos img:hover { filter: grayscale(0%); }
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #333333;
+    margin-top: 40px;
+    padding-top: 20px;
+    font-size: 14px;
+    color: #777777;
+}
+
+/* --- Style du bouton flottant (Mis à jour avec animation) --- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366; /* Vert WhatsApp */
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Ombre de base plus douce */
+    z-index: 1000;
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    
+    /* --- AJOUT DE L'ANIMATION ICI --- */
+    animation: pulse-whatsapp 2s infinite; /* Nom de l'animation, durée, répétition infinie */
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    color: white;
+    background-color: #128c7e; /* Vert plus foncé au survol */
+    animation: none; /* On arrête l'animation quand la souris est dessus */
+}
+
+/* --- Style de l'infobulle (Tooltip - Inchangé) --- */
+.tooltip-whatsapp {
+    position: absolute;
+    right: 75px;
+    background-color: #333;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(10px);
+}
+
+.tooltip-whatsapp::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #333;
+}
+
+.whatsapp-float:hover .tooltip-whatsapp {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* --- DÉFINITION DE L'ANIMATION DE PULSATION --- */
+@keyframes pulse-whatsapp {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); /* Ombre verte transparente */
+    }
+    70% {
+        transform: scale(1.05); /* Légère augmentation de taille */
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); /* L'ombre s'étend et devient invisible */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+/* Adaptation Mobile */
+@media (max-width: 768px) {
+    .tooltip-whatsapp {
+        display: none;
+    }
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+}
+
+/* --- Style du bouton flottant (Mis à jour avec animation) --- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366; /* Vert WhatsApp */
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Ombre de base plus douce */
+    z-index: 1000;
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    
+    /* --- AJOUT DE L'ANIMATION ICI --- */
+    animation: pulse-whatsapp 2s infinite; /* Nom de l'animation, durée, répétition infinie */
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    color: white;
+    background-color: #128c7e; /* Vert plus foncé au survol */
+    animation: none; /* On arrête l'animation quand la souris est dessus */
+}
+
+/* --- Style de l'infobulle (Tooltip - Inchangé) --- */
+.tooltip-whatsapp {
+    position: absolute;
+    right: 75px;
+    background-color: #333;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(10px);
+}
+
+.tooltip-whatsapp::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #333;
+}
+
+.whatsapp-float:hover .tooltip-whatsapp {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* --- DÉFINITION DE L'ANIMATION DE PULSATION --- */
+@keyframes pulse-whatsapp {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); /* Ombre verte transparente */
+    }
+    70% {
+        transform: scale(1.05); /* Légère augmentation de taille */
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); /* L'ombre s'étend et devient invisible */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+/* Adaptation Mobile */
+@media (max-width: 768px) {
+    .tooltip-whatsapp {
+        display: none;
+    }
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+}
+.dynamic-hero {
+    position: relative;
+    width: 100%; /* Plus large pour accommoder l'image et le texte */
+    max-width: 1100px;
+    height: 450px;
+    margin: 40px auto;
+    overflow: hidden;
+    border-radius: 20px;
+    background: white; /* Fond blanc pour la partie texte */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.slider-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex; /* ACTIVE LE CÔTE À CÔTE */
+    flex-direction: row; 
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* --- PARTIE IMAGE (50%) --- */
+.slide-single-img {
+    width: 50%; /* L'image prend la moitié gauche */
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- PARTIE TEXTE (50%) --- */
+.caption-box {
+    width: 50%; /* Le texte prend la moitié droite */
+    height: 100%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background:rgba(255, 204, 0, 0.7); /* Fond propre pour lire */
+    box-sizing: border-box;
+    text-align: left;
+    
+    /* Animation du texte */
+    transform: translateX(30px);
+    transition: all 0.6s ease 0.3s;
+}
+
+.slide.active .caption-box {
+    transform: translateX(0);
+}
+
+.caption-box h2 {
+    font-size: 28px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.caption-box p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* --- LE BADGE --- */
+.badge {
+    background: #f9169a;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+/* --- ADAPTATION MOBILE (L'un sur l'autre) --- */
+@media (max-width: 768px) {
+    .slide {
+        flex-direction: column; /* On repasse l'un sur l'autre sur petit écran */
+    }
+    .slide-single-img, .caption-box {
+        width: 100%;
+        height: 50%;
+    }
+    .caption-box {
+        padding: 20px;
+    }
+}
+
+/* Reset & Base */
+body { margin: 0; padding-top: 80px; } /* Espace pour le menu fixe */
+
+/* Navigation */
+.main-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8); /* Fond blanc transparent */
+    backdrop-filter: blur(10px); /* L'effet de flou magique */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-logo {
+    height: 50px;
+    width: auto;
+    border-radius: 8px;
+}
+
+.brand-text h1 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #333;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brand-text span {
+    font-size: 0.8rem;
+    color: #f9169a; /* Ton orange */
+    font-weight: 600;
+}
+
+/* Liens du menu */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #f9169a;
+}
+
+/* Section Hero modernisée */
+.hero-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: #fbfbfb;
+}
+
+.hero-badge {
+    background: rgba(249, 115, 22, 0.1);
+    color: #f9169a;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.hero-section h2 {
+    font-size: 2.5rem;
+    color: #222;
+    margin: 0;
+    font-weight: 800;
+}
+
+.hero-line {
+    width: 60px;
+    height: 4px;
+    background: #f9169a;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links { display: none; } /* On cache le menu sur mobile pour l'instant */
+    .hero-section h2 { font-size: 1.8rem; }
+}
+
+/* A PROPOS DE NOUS
+//* --- SECTION À PROPOS --- */
+.about-section {
+    padding: 80px 20px;
+    background-color: #ffffff;
+    overflow: hidden; /* Empêche les débordements pendant l'animation */
+}
+
+.container.about-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes égales */
+    gap: 60px;
+    align-items: center;
+}
+
+/* --- IMAGE ET BADGE --- */
+.about-image {
+    position: relative;
+    z-index: 1;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+.experience-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: #f9169a; /* Orange Horizon */
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
+    min-width: 140px;
+}
+
+.experience-badge .number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.experience-badge .text {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* --- CONTENU TEXTE --- */
+.section-subtitle {
+    color: #f9169a;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.main-p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+/* --- FONCTIONNALITÉS (FEATURES) --- */
+.about-features {
+    margin-bottom: 35px;
+}
+
+.feature-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.feature-item i {
+    color: #f9169a;
+    font-size: 1.5rem;
+    margin-top: 5px;
+}
+
+.feature-item h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #1a1a1a;
+}
+
+.feature-item p {
+    margin: 5px 0 0;
+    color: #777;
+    font-size: 0.95rem;
+}
+
+/* --- BOUTONS --- */
+.about-btns {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 14px 30px;
+    border: 2px solid #f9169a;
+    color: #f9169a;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 50px;
+    transition: 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: #f9169a;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.btn-share {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-share:hover {
+    background: #000;
+    transform: translateY(-3px);
+}
+
+/* --- ANIMATIONS DE RÉVÉLATION (REVEAL) --- */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 1s ease-out;
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 1s ease-out;
+}
+
+/* Classe ajoutée par le JavaScript quand on scrolle */
+.about-section.active-reveal .reveal-left,
+.about-section.active-reveal .reveal-right {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* --- RESPONSIVE (MOBILE) --- */
+@media (max-width: 992px) {
+    .container.about-grid {
+        grid-template-columns: 1fr; /* Une seule colonne sur tablette/mobile */
+        gap: 40px;
+    }
+
+    .about-image {
+        max-width: 500px;
+        margin: 0 auto 40px; /* Centre l'image */
+    }
+
+    .about-content {
+        text-align: center;
+    }
+
+    .feature-item {
+        text-align: left;
+    }
+
+    .about-btns {
+        justify-content: center;
+    }
+
+    .about-content h2 {
+        font-size: 2rem;
+    }
+}
+
+/* --- Mise en page Côte à Côte --- */
+.about-section {
+    padding: 60px 5%;
+    background: #fff;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50% / 50% */
+    gap: 50px; /* Espace entre l'image et le texte */
+    align-items: center; /* Aligne verticalement au centre */
+}
+
+/* --- Style du bloc Image --- */
+.about-image-container {
+    position: relative;
+    width: 100%;
+}
+
+.about-slider {
+    position: relative;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.about-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.about-slide.active { opacity: 1; }
+
+/* --- Style du bloc Texte --- */
+.about-text-content {
+    text-align: left;
+}
+
+.section-subtitle {
+    color: #f9169a;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.about-text-content h2 {
+    font-size: 32px;
+    margin: 15px 0;
+    color: #222;
+}
+
+.about-features {
+    margin: 20px 0;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* --- Adaptation Mobile (L'un sur l'autre) --- */
+@media (max-width: 850px) {
+    .about-grid {
+        grid-template-columns: 1fr; /* Repasse sur une seule colonne */
+        text-align: center;
+    }
+    .about-text-content {
+        text-align: center;
+    }
+    .about-btns {
+        justify-content: center;
+    }
+}
+
+
+.about-section {
+    padding: 80px 10%;
+    background-color: #fff;
+}
+
+.about-container {
+    display: flex; /* Active l'alignement côte à côte */
+    align-items: center; /* Aligne l'image et le texte verticalement au centre */
+    gap: 50px; /* Espace entre l'image et le texte */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* On donne une largeur égale ou spécifique à chaque bloc */
+.about-image {
+    flex: 1; /* Prend 50% de l'espace */
+    position: relative;
+}
+
+.about-content {
+    flex: 1.2; /* Prend un peu plus de place pour le texte */
+}
+
+/* --- Style du Slider d'image --- */
+.about-slider {
+    position: relative;
+    height: 450px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.about-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.about-slide.active {
+    opacity: 1;
+}
+
+/* --- Responsive : Sur téléphone, on les remet l'un sur l'autre --- */
+@media (max-width: 992px) {
+    .about-container {
+        flex-direction: column; /* Empilement vertical sur petits écrans */
+        text-align: center;
+    }
+    
+    .about-image {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
+
+
+body {
+    background-color: #fffaf0; /* Couleur "Ivory" (ivoire), très apaisante */
+    margin: 0;
+}
+
+
+#type-text {
+    border-right: 3px solid #f9169a; /* La barre du curseur */
+    padding-right: 5px;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #f9169a; }
+}
+
+.hero-dynamic h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #333;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.partner-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.partner-logos img {
+    height: 45px; /* Taille uniforme */
+    width: auto;
+    filter: grayscale(0%); /* FORCE LA COULEUR ICI */
+    opacity: 1;            /* Assure que ce n'est pas transparent */
+    background: white;     /* Fond blanc pour que les logos ressortent sur le noir du footer */
+    padding: 8px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.partner-logos img:hover {
+    transform: scale(1.1); /* Petit effet de zoom au survol */
+}
+
+
+.btn-with-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px; /* Espace entre le logo et le texte */
+    padding: 12px 20px !important;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.btn-icon {
+    height: 24px; /* Taille du logo dans le bouton */
+    width: auto;
+    background: white; /* Petit fond blanc pour que le logo ressorte bien */
+    padding: 2px;
+    border-radius: 4px;
+}
+
+/* Couleurs spécifiques */
+#btn-pay-local {
+    background-color: #f9169a; /* Ton rose/orange */
+}
+
+#btn-pay-inter {
+    background-color: #003087; /* Bleu PayPal officiel */
+}
+
+.btn-with-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    filter: brightness(1.1);
+}
+
+
+.footer-bottom {
+    padding: 30px 0;
+    border-top: 1px solid #333;
+    background: #1a1a1a;
+    color: #777;
+}
+
+.signature-abz {
+    margin-top: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.signature-abz a {
+    text-decoration: none;
+    color: #bbb;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.signature-abz a span {
+    color: orange; /* Ton rose/orange signature */
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(249, 22, 154, 0.3);
+}
+
+.signature-abz a:hover {
+    color: #fff;
+    transform: scale(1.05);
+    letter-spacing: 3px;
+}
+
+/* Petit éclair qui bouge à côté de ton nom */
+.fa-bolt {
+    color: #ffcc00;
+    margin-left: 5px;
+    animation: flash 1.5s infinite;
+}
+
+@keyframes flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+
+.btn-tiktok i {
+    margin-right: 8px; /* Espace entre l'icône et le texte */
+}
+
+.btn-tiktok:hover {
+    background: #000000; /* Fond noir TikTok au survol */
+    color: #00f2ea !important; /* Couleur turquoise TikTok */
+    border-color: #ff0050; /* Bordure rouge TikTok */
+    box-shadow: 3px 3px 0px #ff0050, -3px -3px 0px #00f2ea; /* Effet glitch TikTok */
+    transform: translateY(-3px);
+}

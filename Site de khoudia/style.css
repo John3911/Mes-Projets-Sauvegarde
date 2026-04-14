@@ -1,0 +1,413 @@
+/* ============================================================
+   1. STYLES GÉNÉRAUX & RESET
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #FDF5E6; 
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h2.section-title {
+    font-size: 2.2rem;
+    margin-top: 40px;
+    color: #222;
+    text-align: center;
+}
+
+p.section-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* --- Barre de navigation (Header) --- */
+header.shop-header {
+    background-color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header.shop-header h1 {
+    color: #FF6F61;
+    font-size: 1.6rem;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    color: #FF6F61;
+}
+/* ============================================================
+   2. PANIER FLOTTANT (PLUS VISIBLE)
+   ============================================================ */
+/* ============================================================
+   2. PANIER FLOTTANT (DESIGN ROSE GLAMOUR)
+   ============================================================ */
+.cart-icon-container {
+    position: fixed;
+    bottom: 30px;
+    right: 25px;
+    background-color: #FF69B4; /* Rose Hot Pink dynamique */
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4); /* Ombre rosée */
+    cursor: pointer;
+    z-index: 10000;
+    border: 3px solid #ffffff; /* Liseré blanc épais pour le contraste */
+    transition: all 0.3s ease;
+}
+
+.cart-icon-container:hover {
+    transform: scale(1.1);
+    background-color: #FF1493; /* Rose plus foncé au survol */
+}
+
+.cart-icon-container i {
+    color: #ffffff;
+    font-size: 1.8rem;
+}
+
+/* Le petit chiffre (Badge Noir ou Blanc) */
+#cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #222; /* Noir pour que le chiffre ressorte fort sur le rose */
+    color: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    border: 2px solid #ffffff;
+}
+
+/* Optimisation pour Smartphone */
+@media (max-width: 768px) {
+    .cart-icon-container {
+        bottom: 25px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+    }
+}
+@keyframes bounceIn {
+    0% { transform: scale(0); }
+    70% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.cart-icon-container {
+    animation: bounceIn 0.8s ease-out;
+}
+
+/* ============================================================
+   3. SECTION PRÉSENTATION & CATÉGORIES
+   ============================================================ */
+.about-store {
+    padding: 60px 0;
+    background-color: #fff;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.about-text { flex: 1; min-width: 300px; }
+.badge {
+    background: #FFF0ED;
+    color: #FF6F61;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.about-text h2 { font-size: 2.5rem; margin: 20px 0; }
+
+.features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.feature-item { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.feature-item i { color: #25D366; }
+
+.about-image { flex: 1; min-width: 300px; }
+.about-image img { width: 100%; border-radius: 25px; box-shadow: 15px 15px 0px #FDF5E6; }
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.cat-card {
+    text-decoration: none;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: 0.4s;
+}
+
+.cat-card:hover { transform: translateY(-10px); }
+.cat-image { height: 350px; position: relative; overflow: hidden; }
+.cat-image img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+.cat-card:hover .cat-image img { transform: scale(1.1); }
+
+.cat-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; transition: 0.3s;
+}
+
+.cat-overlay span {
+    color: white; border: 2px solid white;
+    padding: 10px 20px; border-radius: 50px; font-weight: bold;
+}
+
+.cat-card:hover .cat-overlay { opacity: 1; }
+.cat-info { padding: 25px; text-align: center; }
+
+/* ============================================================
+   4. PRODUITS & OPTIONS
+   ============================================================ */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    border: 1px solid #eee;
+}
+
+.product-image img { 
+    width: 100%; 
+    height: 300px; 
+    object-fit: contain; /* Garde toute l'image visible */
+    border-radius: 12px;
+    background: #f9f9f9; /* Un fond gris clair pour les images avec fond blanc */
+}
+
+.price {
+    color: #FF6F61;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin: 10px 0;
+}
+
+.product-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.product-select, .product-qty {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
+
+.buy-wa {
+    background-color: #25D366;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.buy-wa:hover { background-color: #128C7E; }
+
+/* ============================================================
+   5. MODAL PANIER (CORRIGÉ)
+   ============================================================ */
+.cart-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-content {
+    background: white;
+    padding: 25px;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 20px;
+    position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.close-cart {
+    position: absolute;
+    right: 20px; top: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.cart-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.cart-total {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-top: 2px solid #f9f9f9;
+    padding-top: 15px;
+}
+
+.btn-order-whatsapp {
+    background: #25D366;
+    color: white;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+/* ============================================================
+   6. CONTACT & FOOTER
+   ============================================================ */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 40px 0;
+}
+
+.contact-info-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.social-links a { font-size: 1.5rem; color: #333; margin-right: 15px; }
+
+.footer-bottom {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   7. RESPONSIVE MOBILE
+   ============================================================ */
+@media (max-width: 768px) {
+    .about-content { flex-direction: column; text-align: center; }
+    .about-image { order: -1; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .product-image img { height: 180px; object-fit: contain; } /* Ajustement mobile */
+    .price { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+    .product-grid { grid-template-columns: 1fr; }
+}
+.cart-icon-container {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-icon-container i {
+    font-size: 2rem;
+    color: #333;
+}
+
+#cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #e67e22; /* Orange Terang'Art */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    min-width: 18px;
+    text-align: center;
+}
+.contact-header-fixed {
+    position: sticky;   /* Reste collé en haut */
+    top: 0;            /* Position exacte au sommet */
+    z-index: 2000;     /* Doit être plus élevé que le reste pour passer devant */
+    background-color: #f9f9f9;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Ombre pour le détacher du reste */
+}
+
+.contact-header-fixed h2 {
+    text-align: center;
+    padding: 15px 0;   /* Un peu moins de padding pour ne pas manger tout l'écran */
+    font-size:3rem;
+    margin: 0;
+    color: #333;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Ajustement pour Mobile */
+@media (max-width: 768px) {
+    .contact-header-fixed h2 {
+        font-size: 2rem; /* Plus petit sur téléphone pour laisser de la place */
+        padding: 10px 0;
+    }
+}

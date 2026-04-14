@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/logo-abz.png">
+
+<link rel="apple-touch-icon" href="images/logo-abz.png">s
+    <title>ABZ DESIGN TECH - Expert IT & Security</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1a1a">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js');
+    });
+  }
+</script>
+</head>
+<body>
+
+ <header class="header-top">
+    <div class="container top-flex">
+        <div class="logo-area">
+            <a href="index.html">
+                <img src="images/logo-abz.png" alt="ABZ DESIGN TECH Logo">
+            </a>
+        </div>
+        <div class="slogan-area">
+            <p>Votre partenaire en solutions digitales et sécurité à Dakar</p>
+
+        </div>
+        <div class="user-account-container" onclick="ouvrirModalConnexion()" style="cursor:pointer;">
+    <i class="fas fa-user"></i>
+    <span class="user-text">Connexion</span>
+</div>
+</header>
+
+
+<nav class="nav-sticky">
+    <div class="container nav-flex">
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Accueil</a></li>
+            
+            <li class="dropdown">
+                <a href="informatique.html">Informatique <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="informatique.html#container-reseaux"><i class="fas fa-network-wired"></i> Réseaux</a></li>
+                    <li><a href="informatique.html#container-cablage"><i class="fas fa-ethernet"></i> Câblage</a></li>
+                    <li><a href="informatique.html#container-fibre"><i class="fas fa-bolt"></i> Fibre</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="securite.html">Sécurité <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="securite.html#container-surveillance"><i class="fas fa-video"></i> Vidéosurveillance</a></li>
+                    <li><a href="securite.html#container-acces"><i class="fas fa-fingerprint"></i> Contrôle d'accès</a></li>
+                    <li><a href="securite.html#container-domotique"><i class="fas fa-home"></i> Domotique</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="electrique.html">Électrique <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="electrique.html#container-tableau"><i class="fas fa-charging-station"></i> Tableau</a></li>
+                    <li><a href="electrique.html#container-solaire"><i class="fas fa-solar-panel"></i> Solaire</a></li>
+                </ul>
+            </li>
+
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="search-container">
+    <input type="text" id="search-input" placeholder="Rechercher un article (ex: Hikvision, Legrand...)" onkeyup="filtrerArticles()">
+    <button class="search-btn"><i class="fas fa-search"></i></button>
+    <div id="search-results" class="search-suggestions"></div>
+</div>
+        <div class="cart-icon-container" onclick="ouvrirPanier()">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </div>
+</nav>
+
+<section class="dynamic-hero">
+    <div class="slider-wrapper">
+        <div class="slide active">
+            <img src="images/presentation-abz.jpg" alt="Installation ABZ" class="slide-single-img">
+            <div class="slide-caption">
+                <span class="badge">Expertise Réseaux</span>
+                <h2>Infrastructures IT Haute Performance</h2>
+                <p>Solutions de câblage et connectivité pour entreprises à Dakar.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/presentation-video.jpg" alt="Vidéosurveillance" class="slide-single-img">
+            <div class="slide-caption">
+                <span class="badge">Smart Security</span>
+                <h2>Vidéosurveillance & Contrôle d'Accès</h2>
+                <p>Protégez vos locaux avec les dernières technologies biométriques.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/presentation-security.jpg" alt="Électricité" class="slide-single-img">
+            <div class="slide-caption">
+                <span class="badge">Énergie</span>
+                <h2>Solutions Électriques & Solaires</h2>
+                <p>Optimisez votre consommation avec nos installations certifiées.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="main-intro-section" style="background: linear-gradient(135deg, #020817 0%, #0a192f 50%, #112240 100%) !important;
+">
+    <div class="hero-minimal container">
+        <div class="hero-content">
+            <button id="install-btn" style="display: block !important; padding: 15px 35px; background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%); color: #ffffff; border: 2px solid #ffffff; border-radius: 50px; cursor: pointer; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 16px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(0,0,0,0.3); transition: all 0.3s ease; margin: 30px auto; outline: none;">
+  📥 Installer ABZ DESIGN TECH
+</button>
+
+<script>
+  // Petit effet au survol pour le rendre interactif
+  const btn = document.getElementById('install-btn');
+  btn.addEventListener('mouseover', () => {
+    btn.style.transform = 'translateY(-3px)';
+    btn.style.boxShadow = '0 12px 25px rgba(0,0,0,0.4)';
+  });
+  btn.addEventListener('mouseout', () => {
+    btn.style.transform = 'translateY(0)';
+    btn.style.boxShadow = '0 8px 20px rgba(0,0,0,0.3)';
+  });
+</script>
+            <span class="badge-tech">Expertise & Innovation</span>
+            <h1>ABZ DESIGN TECH : Votre Partenaire Technologique à Dakar</h1>
+            <p class="hero-description">
+                Plus qu'une simple boutique, <strong>ABZ DESIGN TECH</strong> est votre allié pour la transformation digitale et la sécurité à Dakar. Nous combinons vente de matériel et prestations de services expertes.
+            </p>
+        
+            <div class="hero-features-list">
+                <div class="feature-item">
+                    <i class="fas fa-tools"></i>
+                    <span><strong>Installations :</strong> Smart Security & Réseaux.</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <span><strong>Digital :</strong> Sites web & Solutions logicielles.</span>
+                </div>
+            </div>
+
+            <div class="hero-actions">
+                <a href="#produits" class="btn-primary">Voir la Boutique</a>
+                <a href="https://wa.me/221773912100" class="btn-secondary">Intervention Rapide</a>
+            </div>
+
+            <div class="trust-icons">
+                <div class="trust-item"><i class="fas fa-truck"></i> Rapide</div>
+                <div class="trust-item"><i class="fas fa-check-circle"></i> Garanti</div>
+                <div class="trust-item"><i class="fas fa-star"></i> 24h/7</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div id="produits" class="category-showcase container">
+        <h2 class="section-title">Nos Équipements Disponibles</h2>
+        <p class="section-subtitle">Matériel de haute technologie sélectionné pour sa fiabilité et sa performance.</p>
+        
+        <div class="category-grid">
+            <a href="informatique.html" class="cat-card">
+                <div class="cat-image">
+                    <img src="images/cat-it.png" alt="Informatique">
+                    <div class="cat-overlay"><span>Voir les produits</span></div>
+                </div>
+                <div class="cat-info">
+                    <h3>Informatique</h3>
+                    <p>Routeurs, Switchs, Wi-Fi et câblage RJ45/Fibre.</p>
+                </div>
+            </a>
+
+            <a href="securite.html" class="cat-card">
+                <div class="cat-image">
+                    <img src="images/cat-security.png" alt="Sécurité">
+                    <div class="cat-overlay"><span>Découvrir</span></div>
+                </div>
+                <div class="cat-info">
+                    <h3>Smart Security</h3>
+                    <p>Caméras IP, Contrôle d'accès, serrures intelligentes et alarmes.</p>
+                </div>
+            </a>
+
+            <a href="electrique.html" class="cat-card">
+                <div class="cat-image">
+                    <img src="images/cat-solar.png" alt="Électrique">
+                    <div class="cat-overlay"><span>En savoir plus</span></div>
+                </div>
+                <div class="cat-info">
+                    <h3>Électrique</h3>
+                    <p>Tableaux, Protection, Solaire et Onduleurs.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+    <section class="services-section container">
+    <h2 class="section-title" style="color: #000000 !important; font-weight: bold !important;">Nos Prestations de Services</h2>
+    <p class="section-subtitle">Expertise technique et solutions digitales sur mesure pour votre entreprise.</p>
+
+    <div class="services-grid">
+    <div class="service-card">
+            <div class="service-icon"><i class="fas fa-camera"></i></div>
+            <h3>Vidéosurveillance</h3>
+            <p>Installation de caméras IP haute définition et systèmes d'enregistrement avec accès à distance sur smartphone.</p>
+            <a href="https://wa.me/221773912100?text=Bonjour,%20je%20souhaite%20un%20devis%20pour%20une%20installation%20de%20vidéosurveillance." class="btn-quote">
+                <i class="fab fa-whatsapp"></i> Devis Vidéo
+            </a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon"><i class="fas fa-fingerprint"></i></div>
+            <h3>Contrôle d'Accès</h3>
+            <p>Sécurisation de vos entrées via biométrie, reconnaissance faciale et interphonie intelligente.</p>
+            <a href="https://wa.me/221773912100?text=Bonjour,%20je%20souhaite%20un%20devis%20pour%20un%20système%20de%20contrôle%20d'accès." class="btn-quote">
+                <i class="fab fa-whatsapp"></i> Devis Accès
+            </a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon"><i class="fas fa-network-wired"></i></div>
+            <h3>Câblage Réseaux</h3>
+            <p>Audit et déploiement d'infrastructures réseaux, baies de brassage et fibre optique.</p>
+            <a href="https://wa.me/221773912100?text=Bonjour,%20je%20souhaite%20un%20devis%20pour%20un%20câblage%20réseau." class="btn-quote">
+                <i class="fab fa-whatsapp"></i> Devis Réseau
+            </a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon"><i class="fas fa-code"></i></div>
+            <h3>Sites Web Dynamiques</h3>
+            <p>Conception de sites vitrines et e-commerce modernes, rapides et connectés à des bases de données (Firebase/SQL).</p>
+            <a href="https://wa.me/221773912100?text=Bonjour,%20je%20souhaite%20un%20devis%20pour%20la%20création%20d'un%20site%20web%20dynamique." class="btn-quote">
+                <i class="fab fa-whatsapp"></i> Devis Web
+            </a>
+        </div>
+    </div>
+</section>
+
+   <div id="cart-modal" class="cart-modal" style="display: none;">
+    <div class="cart-content">
+        <span class="close-cart" onclick="fermerPanier()">×</span>
+        <h2>Mon Panier</h2>
+        
+        <div id="liste-panier"></div> 
+        
+        <div class="cart-total">
+            <strong>Total: <span id="total-panier">0</span> FCFA</strong>
+        </div>
+        
+        <button class="btn-order-whatsapp" onclick="envoyerCommandeWhatsApp()">
+            <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+        </button>
+    </div>
+</div>
+
+    <div id="auth-modal" class="cart-modal" style="display: none;">
+        <div class="cart-content auth-content">
+            <span class="close-cart" onclick="fermerModalConnexion()">&times;</span>
+            
+            <div id="login-form">
+                <h2>Connexion Client</h2>
+                <p>Accédez à votre espace ABZ DESIGN TECH</p>
+                <input type="email" placeholder="Votre Email" id="login-email" required>
+                <input type="password" placeholder="Mot de passe" id="login-pass" required>
+                <button class="btn-primary" onclick="connexion()">Se connecter</button>
+                <p class="switch-auth">Pas encore de compte ? <a href="#" onclick="switchAuth('register')">Créer un compte</a></p>
+            </div>
+
+            <div id="register-form" style="display: none;">
+                <h2>Créer un compte</h2>
+                <p>Rejoignez la communauté ABZ</p>
+                <input type="text" placeholder="Nom complet" id="reg-name" required>
+                <input type="email" placeholder="Votre Email" id="reg-email" required>
+                <input type="password" placeholder="Définir un mot de passe" id="reg-pass" required>
+                <button class="btn-primary" onclick="inscription()">S'inscrire</button>
+                <p class="switch-auth">Déjà inscrit ? <a href="#" onclick="switchAuth('login')">Se connecter</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+    <div class="container footer-grid">
+        <div class="footer-about">
+            <p>Expertise en solutions digitales, sécurité électronique et énergie électrique à Dakar.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div id="contact" class="footer-contact">
+            <h3>Contactez-nous</h3>
+            <p><i class="fas fa-phone"></i> +221 77 391 21 00</p>
+            <p><i class="fas fa-envelope"></i> contact@abzdesigntech.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> MHM4+XW5, Dakar, Sénégal</p>
+            <p><i class="fas fa-clock"></i> Ouvert 24h/24</p>
+        </div>
+
+        <div class="footer-map">
+            <h3>Notre Emplacement</h3>
+            <div style="width: 100%; height: 150px; border-radius: 8px; overflow: hidden; margin-top: 10px;">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.747514214486!2d-17.447514!3d14.726514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQzJzM1LjQiTiAxN8KwMjYnNTEuMSJX!5e0!3m2!1sfr!2ssn!4v1700000000000!5m2!1sfr!2ssn" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+            <a href="https://maps.app.goo.gl/NkfLEk1b6gAYepRs8" target="_blank" style="color: #ffcc00; font-size: 13px; text-decoration: none; display: block; margin-top: 5px;">
+                <i class="fas fa-directions"></i> Itinéraire Google Maps
+            </a>
+        </div>
+
+        <div class="footer-partners">
+            <h3>Nos Partenaires</h3>
+            <div class="partner-logos">
+                <img src="images/hikvision-logo.png" alt="Hikvision">
+                <img src="images/dahua-logo.png" alt="Dahua">
+                <img src="images/cisco-logo.png" alt="Cisco">
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 <strong>ABZ DESIGN TECH</strong>. Tous droits réservés.</p>
+    </div>
+</footer>
+
+    <a href="https://wa.me/221773912100?text=Bonjour%20ABZ%20DESIGN%20TECH" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip-whatsapp">Discuter avec un expert</span>
+    </a>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // On charge les produits avec le secteur "Général" ou "Tous" pour l'index
+        chargerProduitsPublics('Général'); 
+    });
+</script>
+<div id="product-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="fermerDetail()">&times;</span>
+        
+        <div class="modal-body">
+            <div class="modal-img-container">
+                <img id="modal-img" src="" alt="Produit">
+            </div>
+
+            <div class="modal-info-container">
+                <h2 id="modal-title">Nom du produit</h2>
+                <p id="modal-ref"></p>
+                <p id="modal-desc"></p>
+                <div class="modal-price-row">
+                    <span id="modal-price"></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal-footer-action">
+            </div>
+    </div>
+</div>
+<div id="auth-modal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; justify-content:center; align-items:center;">
+    <div class="modal-content" style="background:white; padding:35px; border-radius:15px; width:90%; max-width:400px; text-align:center; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+        <span onclick="fermerModalAuth()" style="position:absolute; top:15px; right:20px; cursor:pointer; font-size:30px; color:#333;">&times;</span>
+        
+        <h2 style="margin-bottom:10px; font-family: 'Playfair Display', serif;">Bienvenue</h2>
+        <p style="color:#666; margin-bottom:25px; font-size: 0.95rem;">Accédez à votre espace ABZ DESIGN TECH</p>
+
+        <button onclick="connexionGoogle()" style="width:100%; padding:12px; background:white; border:1px solid #4285F4; border-radius:8px; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:12px; font-weight:600; font-size:16px; color:#4285F4; transition: all 0.2s ease;" onmouseover="this.style.background='#f8faff'" onmouseout="this.style.background='white'">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width:20px; height:20px;">
+            Continuer avec Google
+        </button>
+
+        <div style="margin: 25px 0 15px 0; display: flex; align-items: center; color: #bbb; font-size: 0.75rem;">
+            <div style="flex:1; height:1px; background:#eee;"></div>
+            <span style="padding:0 10px;">SÉCURITÉ</span>
+            <div style="flex:1; height:1px; background:#eee;"></div>
+        </div>
+        <p style="font-size:11px; color:#aaa; margin-bottom: 0;">Authentification protégée par Firebase</p>
+    </div>
+</div>
+</body>
+</html>

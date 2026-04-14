@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Énergie Électrique - ABZ DESIGN TECH</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="header-top">
+    <div class="container top-flex">
+        <div class="logo-area">
+            <a href="index.html">
+                <img src="images/logo-abz.png" alt="ABZ DESIGN TECH Logo">
+            </a>
+        </div>
+        <div class="slogan-area">
+            <p>Votre partenaire en solutions digitales et sécurité à Dakar</p>
+        </div>
+         <div class="user-account-container" onclick="ouvrirModalConnexion()" style="cursor:pointer;">
+    <i class="fas fa-user"></i>
+    <span class="user-text">Connexion</span>
+</div>
+</header>
+
+<nav class="nav-sticky">
+    <div class="container nav-flex">
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Accueil</a></li>
+            
+            <li class="dropdown">
+                <a href="informatique.html">Informatique <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="informatique.html#container-reseaux"><i class="fas fa-network-wired"></i> Réseaux</a></li>
+                    <li><a href="informatique.html#container-cablage"><i class="fas fa-ethernet"></i> Câblage</a></li>
+                    <li><a href="informatique.html#container-fibre"><i class="fas fa-bolt"></i> Fibre</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="securite.html">Sécurité <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="securite.html#container-surveillance"><i class="fas fa-video"></i> Vidéosurveillance</a></li>
+                    <li><a href="securite.html#container-acces"><i class="fas fa-fingerprint"></i> Contrôle d'accès</a></li>
+                    <li><a href="securite.html#container-domotique"><i class="fas fa-home"></i> Domotique</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="electrique.html">Électrique <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="electrique.html#container-tableau"><i class="fas fa-charging-station"></i> Tableau</a></li>
+                    <li><a href="electrique.html#container-solaire"><i class="fas fa-solar-panel"></i> Solaire</a></li>
+                </ul>
+            </li>
+
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+<div class="search-container">
+    <input type="text" id="search-input" placeholder="Rechercher un article (ex: Hikvision, Legrand...)" onkeyup="filtrerArticles()">
+    <button class="search-btn"><i class="fas fa-search"></i></button>
+    <div id="search-results" class="search-suggestions"></div>
+</div>
+        <div class="cart-icon-container" onclick="ouvrirPanier()">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </div>
+</nav>
+    <section class="products-section container">
+    <div class="sub-sector">
+        <h2 class="section-title" style="color: #000000 !important; font-weight: bold !important;"><i class="fas fa-charging-station"></i> Protection & Tableau Électrique</h2>
+        <p style="text-align:center; font-size: 0.9rem; color: #666; margin-bottom:20px;">Disjoncteurs, différentiels et coffrets modulaires aux normes.</p>
+        <div class="category-grid compact-grid" id="container-tableau">
+            </div>
+    </div>
+
+    <div class="sub-sector">
+        <h2 class="section-title" style="color: #000000 !important; font-weight: bold !important;"><i class="fas fa-solar-panel"></i> Solaire & Autonomie Énergétique</h2>
+        <div class="category-grid compact-grid" id="container-solaire">
+            </div>
+    </div>
+</section>
+
+    <div id="cart-modal" class="cart-modal" style="display: none;">
+        <div class="cart-content">
+            <span class="close-cart" onclick="fermerPanier()">×</span>
+            <h2 style="border-bottom: 2px solid #0062ff; padding-bottom: 10px; margin-bottom: 15px;">Mon Panier</h2>
+            
+            <div id="liste-panier"></div> 
+            
+            <div class="cart-total" style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: right;">
+                <strong>Total: <span id="total-panier">0</span> FCFA</strong>
+            </div>
+            
+            <button class="btn-order-whatsapp" onclick="envoyerCommandeWhatsApp()" style="width:100%; margin-top:15px; background:#25D366; color:white; border:none; padding:12px; border-radius:5px; font-weight:bold; cursor:pointer;">
+                <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            mettreAJourCompteur();
+            // Charge uniquement les produits du secteur Électrique
+            chargerProduitsPublics('Électrique');
+        });
+    </script>
+</body>
+<div id="product-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="fermerDetail()">&times;</span>
+        
+        <div class="modal-body">
+            <div class="modal-img-container">
+                <img id="modal-img" src="" alt="Produit">
+            </div>
+
+            <div class="modal-info-container">
+                <h2 id="modal-title">Nom du produit</h2>
+                <p id="modal-ref"></p>
+                <p id="modal-desc"></p>
+                <div class="modal-price-row">
+                    <span id="modal-price"></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal-footer-action">
+            </div>
+    </div>
+</div>
+<div id="auth-modal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; justify-content:center; align-items:center;">
+    <div class="modal-content" style="background:white; padding:30px; border-radius:15px; width:90%; max-width:400px; text-align:center; position:relative; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+        <span onclick="fermerModalAuth()" style="position:absolute; top:10px; right:20px; cursor:pointer; font-size:30px; color:#333;">&times;</span>
+        
+        <h2 style="margin-bottom:10px; font-family: 'Playfair Display', serif;">Bienvenue</h2>
+        <p style="color:#666; margin-bottom:25px;">Connectez-vous pour gérer vos commandes</p>
+
+        <button onclick="connexionGoogle()" style="width:100%; padding:12px; background:white; border:1px solid #4285F4; border-radius:8px; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:12px; font-weight:600; font-size:16px; color:#4285F4; transition: 0.3s;">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width:20px; height:20px;">
+            Continuer avec Google
+        </button>
+
+        <div style="margin:20px 0; display: flex; align-items: center; color: #aaa;">
+            <div style="flex:1; height:1px; background:#eee;"></div>
+            <span style="padding:0 10px; font-size:12px;">OU</span>
+            <div style="flex:1; height:1px; background:#eee;"></div>
+        </div>
+
+        <p style="font-size:12px; color:#aaa;">La connexion est sécurisée par Firebase</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon de Charité - Dakar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="background-color: antiquewhite;">
+ <nav class="main-nav" style="background-color: rgba(255, 204, 0, 0.7); height: 60px; margin: 0; padding: 0;">
+    <div class="nav-container">
+        <div class="brand">
+            <img src="images/logo.png" alt="Logo" class="nav-logo" style="height: 40px;">
+            <div class="brand-text">
+                <h1 style="margin: 0; font-size: 1.2rem;">Horizon de Charité</h1>
+                <span style="font-size: 0.8rem;">Dakar, Sénégal</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#accueil" class="active">Accueil</a></li>
+            <li><a href="#donner">Faire un Don</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="hero-section" style="padding-top: 1px; margin-top: 0; background-color: #fbfbfb;;">
+    <h2 style="text-align: center; font-family: sans-serif; margin: 0 auto; padding: 5px 0;">
+        Horizon de Charité : Votre soutien pour 
+        <span id="type-text" style="color: #f9169a; border-right: 3px solid #f9169a; min-width: 10px; display: inline-block;"></span> 
+        à Dakar
+    </h2>
+</header>
+    <section class="dynamic-hero">
+    <div class="slider-wrapper">
+        <div class="slide active">
+            <img src="images/don-alimentaire.jpg" alt="Don de nourriture" class="slide-single-img">
+            <div class="caption-box">
+                <span class="badge">Urgence Alimentaire</span>
+                <h2>Soutien aux Familles</h2>
+                <p>Distribution de kits alimentaires mensuels à Dakar.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/education-orphelins.jpg" alt="Éducation" class="slide-single-img">
+            <div class="caption-box">
+                <span class="badge">Éducation</span>
+                <h2>Avenir des Orphelins</h2>
+                <p>Financement de la scolarité et fournitures scolaires.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/sante-pour-tous.jpg" alt="Santé" class="slide-single-img">
+            <div class="caption-box">
+                <span class="badge">Santé</span>
+                <h2>Accès aux Soins</h2>
+                <p>Aide médicale pour les personnes âgées isolées.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <section id="donner" class="dons">
+    <div class="card local">
+        <h3>Sénégal & Afrique</h3>
+        <p>Wave, Orange Money, Free Money</p>
+        <button id="btn-pay-local" class="btn-with-icon">
+            <img src="images/kopar-logo.png" alt="Kopar" class="btn-icon">
+            Donner via Kopar Express
+        </button>
+    </div>
+
+    <div class="card inter">
+        <h3>International</h3>
+        <p>PayPal / Carte Bancaire</p>
+        <button id="btn-pay-inter" class="btn-with-icon">
+            <img src="images/paypal-logo.png" alt="PayPal" class="btn-icon">
+            Donner via PayPal
+        </button>
+    </div>
+</section>
+    <section id="a-propos" class="about-section">
+    <div class="about-container"> <div class="about-image reveal-left">
+            <div class="about-slider">
+                <img src="images/equipe-horizon.jpg" alt="Notre équipe" class="about-slide active">
+                <img src="images/distribution-dakar.jpg" alt="Distribution de dons" class="about-slide">
+                <img src="images/distribution-dakar2.jpg" alt="Enfants aidés" class="about-slide">
+            </div>
+            <div class="experience-badge">
+                <span class="number" data-target="3">0</span>
+                <span class="text">Années d'engagement</span>
+            </div>
+        </div>
+
+        <div class="about-content reveal-right">
+            <span class="section-subtitle">Qui sommes-nous ?</span>
+            <h2>Bâtir un Horizon d'Espoir pour chaque enfant</h2>
+            <p class="main-p">
+                <strong>Horizon de Charité</strong> est une association basée à Dakar, née d'une volonté simple : transformer la précarité en opportunité.
+            </p>
+            
+            <div class="about-features">
+                <div class="feature-item">
+                    <i class="fas fa-heart"></i>
+                    <div>
+                        <h4>Transparence Totale</h4>
+                        <p>Chaque franc est documenté pour nos donateurs.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Action Locale</h4>
+                        <p>Intervention directe dans les quartiers de Dakar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-btns">
+    <a href="https://www.tiktok.com/@abdouthiam047?lang=fr" target="_blank" class="btn-secondary btn-tiktok">
+        <i class="fab fa-tiktok"></i> En savoir plus
+    </a>
+    
+    <button onclick="partagerSite()" class="btn-share">
+        <i class="fas fa-share-alt"></i> Partager l'espoir
+    </button>
+</div>
+        </div>
+    </div> </section>
+    <script src="script.js"></script>
+    
+<a href="https://wa.me/221773912100?text=Bonjour%20Horizon%20de%20Charité" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip-whatsapp">Besoin d'aide pour un don ?</span>
+</a>
+<footer class="main-footer">
+    <div class="container footer-grid">
+        <div class="footer-about">
+            <h3 style="color: #f9169a;">Horizon de Charité</h3>
+            <p>Soutenir les orphelins et les familles démunies à Dakar à travers la solidarité et le don numérique.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div id="contact" class="footer-contact">
+            <h3>Contactez-nous</h3>
+            <p><i class="fas fa-phone"></i> +221 77 XXX XX XX</p>
+            <p><i class="fas fa-envelope"></i> contact@horizon-charite.sn</p>
+            <p><i class="fas fa-map-marker-alt"></i> Dakar, Sénégal</p>
+            <p><i class="fas fa-clock"></i> Disponible 24h/24</p>
+        </div>
+
+        <div class="footer-map">
+            <h3>Notre Emplacement</h3>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123471.192080362!2d-17.527375!3d14.716677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec172433a017f7d%3A0x9d4c4e7c8a666e!2sDakar%2C%20Senegal!5e0!3m2!1sfr!2ssn!4v1700000000000" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+            <a href="https://goo.gl/maps/DakarLien" target="_blank" class="maps-link">
+                <i class="fas fa-directions"></i> Itinéraire Google Maps
+            </a>
+        </div>
+
+        <div class="footer-partners">
+            <h3>Nos Partenaires</h3>
+            <div class="partner-logos">
+                <img src="images/kopar-logo.png" alt="Kopar Express">
+            
+            </div>
+        </div>
+    </div>
+<div class="footer-bottom">
+    <p>&copy; 2026 Horizon de Charité. Tous droits réservés.</p>
+    
+    <p class="signature-abz">
+        Design & Dev by 
+        <a href="https://abz-design-tech.netlify.app/" target="_blank" title="Contactez le développeur">
+            <span>ABZ</span> DESIGN TECH <i class="fas fa-bolt"></i>
+        </a>
+    </p>
+</div>
+</footer>
+<script>
+    // Test immédiat pour voir si le script se lance
+    console.log("Démarrage du texte dynamique...");
+
+    function startTyping() {
+        const target = document.getElementById('type-text');
+        if (!target) {
+            console.error("L'élément #type-text n'existe pas !");
+            return;
+        }
+
+        const phrases = ["l'Alimentation", "l'Éducation", "la Santé", "les Familles"];
+        let pIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        function type() {
+            const current = phrases[pIndex];
+            
+            if (deleting) {
+                target.innerText = current.substring(0, charIndex--);
+            } else {
+                target.innerText = current.substring(0, charIndex++);
+            }
+
+            let speed = deleting ? 50 : 150;
+
+            if (!deleting && charIndex === current.length + 1) {
+                deleting = true;
+                speed = 2000; // Pause à la fin du mot
+            } else if (deleting && charIndex === 0) {
+                deleting = false;
+                pIndex = (pIndex + 1) % phrases.length;
+                speed = 500; // Pause avant le mot suivant
+            }
+
+            setTimeout(type, speed);
+        }
+
+        type();
+    }
+
+    // On lance après 1 seconde pour être sûr que la page est prête
+    setTimeout(startTyping, 1000);
+</script>
+</body>
+</html>

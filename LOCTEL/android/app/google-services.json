@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "265206840779",
+    "project_id": "loctel-tracker",
+    "storage_bucket": "loctel-tracker.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265206840779:android:06d2e2e77cd83eac824a4e",
+        "android_client_info": {
+          "package_name": "com.example.loctel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH2LXdI29XKtJOyE7rgG0ljyeep7TP8UY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

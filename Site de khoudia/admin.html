@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Cloud Pro - TERANG'ART</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { background: #f0f2f5; padding: 20px; font-family: sans-serif; }
+        .admin-card { max-width: 600px; margin: 0 auto 30px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        input[type="text"], input[type="number"], select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 12px; box-sizing: border-box; }
+        
+        .selector-box { background: #f9f9f9; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #eee; }
+        .grid-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+        .option-item { display: flex; align-items: center; font-size: 14px; cursor: pointer; }
+        .option-item input { margin-right: 8px; width: auto; }
+        
+        .btn-add { background: #25D366; color: white; border: none; padding: 15px; border-radius: 8px; width: 100%; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 10px; transition: 0.3s; }
+        .btn-add:hover { background: #1ebe57; }
+        
+        .product-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+        .btn-del { background: #ff4757; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer; }
+        h3 { color: #333; border-bottom: 2px solid #25D366; padding-bottom: 10px; margin-top: 0; }
+        label { font-weight: bold; color: #555; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="admin-card">
+    <h2 style="text-align: center; color: #25D366;">☁️ Gestionnaire Pro TERANG'ART</h2>
+    
+    <label>Catégorie :</label>
+    <select id="cat">
+        <option value="habillement">👕 Habillement</option>
+        <option value="accessoires">👜 Accessoires</option>
+        <option value="cosmetiques">✨ Cosmétiques</option>
+    </select>
+
+    <input type="text" id="nom" placeholder="Nom du produit (ex: Grand Boubou Wax)">
+    <input type="number" id="prix" placeholder="Prix en CFA (ex: 25000)">
+    <input type="text" id="img" placeholder="Nom de l'image (ex: boubou1.jpg)">
+
+    <div class="selector-box">
+        <label><i class="fas fa-ruler-combined"></i> Tailles disponibles :</label>
+        <div class="grid-options" id="container-tailles">
+            <label class="option-item"><input type="checkbox" name="size" value="S"> S</label>
+            <label class="option-item"><input type="checkbox" name="size" value="M"> M</label>
+            <label class="option-item"><input type="checkbox" name="size" value="L"> L</label>
+            <label class="option-item"><input type="checkbox" name="size" value="XL"> XL</label>
+            <label class="option-item"><input type="checkbox" name="size" value="XXL"> XXL</label>
+            <label class="option-item"><input type="checkbox" name="size" value="Unique" checked> Unique</label>
+        </div>
+    </div>
+
+    <div class="selector-box">
+        <label><i class="fas fa-palette"></i> Couleurs disponibles :</label>
+        <div class="grid-options" id="container-couleurs">
+            <label class="option-item"><input type="checkbox" name="color" value="Noir"> Noir</label>
+            <label class="option-item"><input type="checkbox" name="color" value="Blanc"> Blanc</label>
+            <label class="option-item"><input type="checkbox" name="color" value="Bleu"> Bleu</label>
+            <label class="option-item"><input type="checkbox" name="color" value="Rouge"> Rouge</label>
+            <label class="option-item"><input type="checkbox" name="color" value="Marron"> Marron</label>
+            <label class="option-item"><input type="checkbox" name="color" value="Jaune"> Jaune</label>
+            <label class="option-item"><input type="checkbox" name="color" value="Vert"> Vert</label>
+            <label class="option-item"><input type="checkbox" name="color" value="Wax"> Wax</label>
+            <label class="option-item"><input type="checkbox" name="color" value="Multicolore"> Multi</label>
+            <label class="option-item"><input type="checkbox" name="color" value="Unique" checked> Unique</label>
+        </div>
+    </div>
+    
+    <label>Quantité totale en stock :</label>
+    <input type="number" id="stock" value="1" min="1">
+    
+    <button class="btn-add" id="btnAjouter">🚀 Enregistrer sur le site</button>
+</div>
+
+<div class="admin-card">
+    <h3>📦 Stock en ligne (Google Firestore)</h3>
+    <div id="liste-produits">Chargement du stock...</div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot } 
+    from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCr87n6c40d3vLLPHDEw2MpVSRxPVhQXZU",
+        authDomain: "terang-art.firebaseapp.com",
+        projectId: "terang-art",
+        storageBucket: "terang-art.firebasestorage.app",
+        messagingSenderId: "83033431595",
+        appId: "1:83033431595:web:9b0ec75e4aed126262616e"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.getElementById('btnAjouter').onclick = async () => {
+        // Collecter les tailles cochées
+        const taillesChecked = Array.from(document.querySelectorAll('input[name="size"]:checked')).map(cb => cb.value);
+        // Collecter les couleurs cochées
+        const couleursChecked = Array.from(document.querySelectorAll('input[name="color"]:checked')).map(cb => cb.value);
+
+        const p = {
+            nom: document.getElementById('nom').value,
+            prix: Number(document.getElementById('prix').value),
+            img: document.getElementById('img').value || 'placeholder.jpg',
+            cat: document.getElementById('cat').value,
+            tailles: taillesChecked.length > 0 ? taillesChecked.join(', ') : "Unique",
+            couleurs: couleursChecked.length > 0 ? couleursChecked.join(', ') : "Unique",
+            stock: document.getElementById('stock').value
+        };
+
+        if(p.nom && p.prix > 0) {
+            try {
+                await addDoc(collection(db, "produits"), p);
+                alert("✅ Produit ajouté avec succès !");
+                // Reset simple : on recharge la page pour tout décocher
+                location.reload();
+            } catch (e) {
+                alert("Erreur lors de l'ajout.");
+            }
+        } else {
+            alert("Veuillez remplir le nom et un prix valide.");
+        }
+    };
+
+    onSnapshot(collection(db, "produits"), (snapshot) => {
+        const div = document.getElementById('liste-produits');
+        div.innerHTML = "";
+        snapshot.forEach((docSnap) => {
+            const prod = docSnap.data();
+            div.innerHTML += `
+                <div class="product-item">
+                    <div>
+                        <strong style="color:#25D366">${prod.nom}</strong> — ${prod.prix.toLocaleString()} CFA<br>
+                        <small style="color:#777">
+                            ${prod.cat.toUpperCase()} | 📏 ${prod.tailles} | 🎨 ${prod.couleurs} | 🔢 Stock: ${prod.stock}
+                        </small>
+                    </div>
+                    <button class="btn-del" onclick="supprimerArticle('${docSnap.id}')"><i class="fas fa-trash"></i></button>
+                </div>`;
+        });
+    });
+
+    window.supprimerArticle = async (id) => {
+        if(confirm("Supprimer définitivement ce produit du site ?")) {
+            await deleteDoc(doc(db, "produits", id));
+        }
+    };
+</script>
+</body>
+</html>
